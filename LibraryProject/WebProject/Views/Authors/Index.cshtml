@@ -1,0 +1,56 @@
+﻿@model IEnumerable<ClassLibrary.Models.Author>
+
+@{
+    ViewData["Title"] = "Index";
+}
+Total rows= @ViewBag.TotalRows <br />
+Time to load data = @ViewBag.TotalTime
+
+<h1>Index</h1>
+@using (Html.BeginForm("Index", "Authors", FormMethod.Get))
+{
+    <p>
+        Arama: @Html.TextBox("p")
+        <input type="submit" value="Arama" />
+    </p>
+}
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Fistrname)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Lastname)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DateofBirth)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Fistrname)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Lastname)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DateofBirth)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
